@@ -1,0 +1,47 @@
+def display_question(question, options):
+    print(question)
+    for i, option in enumerate(options, start=1):
+        print(f"{i}. {option}")
+    
+    while True:
+        user_answer = input("Your answer (enter the option number): ")
+        if user_answer.isdigit() and 1 <= int(user_answer) <= len(options):
+            return int(user_answer)
+        else:
+            print("Invalid input. Please enter a valid option number.")
+
+def evaluate_answer(correct_answer, user_answer, score):
+    if user_answer == correct_answer:
+        print("Correct!")
+        return score + 1
+    else:
+        print(f"Wrong! The correct answer was {correct_answer}.")
+        return score
+
+def quiz_game():
+    questions = [
+        {"question": "What is the capital of India?", "options": ["Mumbai", "Chennai", "New Delhi", "Kolkata"], "correct_answer": 3},
+        {"question": "Who is known as the 'Father of the Nation' in India?", "options": ["Jawaharlal Nehru", "Mahatma Gandhi",  "Sardar Patel", "Subhas Chandra Bose"], "correct_answer": 2},
+        {"question": "Which Indian festival is known as the 'Festival of Lights'?", "options": ["Diwali", "Holi", "Navratri", "Eid"], "correct_answer": 1},
+        {"question": "Who is the 'Thalapathy' of Tamil cinema?", "options": ["Rajinikanth", "Kamal Haasan", "Vijay", "Ajith Kumar"], "correct_answer": 3},
+        {"question": "Which Tamil actor played the lead role in the movie 'I' directed by Shankar?", "options": ["Sivakarthikeyan", "Dhanush", "Arya", "Vikram"], "correct_answer": 4},
+    ]
+
+    score = 0
+
+    print("Welcome to the Quiz Game!")
+    print("NOTE: If your spelling is incorrect, it is considered a wrong answer.")
+
+    for i, q in enumerate(questions, start=1):
+        user_answer = display_question(q["question"], q["options"])
+        score = evaluate_answer(q["correct_answer"], user_answer, score)
+
+    total_questions = len(questions)
+    accuracy = (score / total_questions) * 100
+
+    print(f"\nNumber of questions: {total_questions}")
+    print(f"Your score: {score}")
+    print(f"{accuracy:.1f}% questions are correct.")
+
+if __name__ == "__main__":
+    quiz_game()
